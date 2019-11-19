@@ -47,7 +47,6 @@ class Business_Account(Checking_Account):
     def get_balance(self):
         return "%s Your business account balance is %s" %(self.name, self.balance)
 
-
 class Savings_Account(Checking_Account):
     
     def __init__(self,name,balance=100):
@@ -67,8 +66,6 @@ class Savings_Account(Checking_Account):
     def get_balance(self):
         return "%s Your savings account balance is %s" %(self.name, self.balance)
 
-
-#global running_total
 running_total = []
 
 def checking_deposit(account_name):
@@ -108,11 +105,9 @@ def savings_withdraw(account_name):
     bal.get_withdrawal()
     print(bal.get_balance())    
 
-
 account_name = input("Enter username: ") 
 account_type = input("Which account do you want to use? ").lower()
 action = input("Would you like to withdraw or deposit? ").lower()
-
 
 if action == "withdraw" and account_type == "checking":
     checking_withdraw(account_name)
