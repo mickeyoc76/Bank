@@ -1,3 +1,5 @@
+import sqlite3
+
 class Account():
     
     def __init__(self, name=None):
@@ -104,6 +106,52 @@ def savings_withdraw(account_name):
     bal = Savings_Account(user)
     bal.get_withdrawal()
     print(bal.get_balance())    
+
+
+def readSqliteTable():
+    try:
+        sqliteConnection = sqlite3.connect('accounts.db')
+        cursor = sqliteConnection.cursor()
+        print("Connected to SQLite")
+
+        sqlite_select_query = """SELECT * from customers"""
+        cursor.execute(sqlite_select_query)
+        records = cursor.fetchall()
+        records = list(records)
+        for row in records:
+            if account_name in row[1] and account_type in row[4]:
+                curr_bal = row[2]
+                return curr_bal
+            print("\n")
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to read data from sqlite table", error)
+    finally:
+        if (sqliteConnection):
+            sqliteConnection.close()
+            #print("The SQLite connection is closed")
+
+
+def updateSqliteTable():
+    try:
+        sqliteConnection = sqlite3.connect('accounts.db')
+        cursor = sqliteConnection.cursor()
+        print("Connected to SQLite")
+        sql = "UPDATE customers SET balance = %d WHERE name = %s " %(balance, sql_account_name)
+        cursor.execute(sql)
+        sqliteConnection.commit()
+        print("Record Updated successfully ")
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Failed to update sqlite table", error)
+    finally:
+        if (sqliteConnection):
+            sqliteConnection.close()
+            print("The SQLite connection is closed")
+
 
 account_name = input("Enter username: ") 
 account_type = input("Which account do you want to use? ").lower()

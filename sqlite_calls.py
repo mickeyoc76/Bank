@@ -21,9 +21,6 @@ finally:
 
 
 #Create Table and columns
-
-import sqlite3
-
 try:
     sqliteConnection = sqlite3.connect('accounts.db')
     sqlite_create_table_query = '''CREATE TABLE customers (
@@ -50,7 +47,6 @@ finally:
 
 
 #Insert Data
-
 try:
     sqliteConnection = sqlite3.connect('accounts.db')
     cursor = sqliteConnection.cursor()
@@ -74,9 +70,7 @@ finally:
         print("The SQLite connection is closed")
 
 
-
-    # Get Data
-
+# Get Data
 def readSqliteTable():
     try:
         sqliteConnection = sqlite3.connect('accounts.db')
@@ -111,7 +105,6 @@ readSqliteTable()
 
 
 #Update Data
-
 def updateSqliteTable():
     try:
         sqliteConnection = sqlite3.connect('accounts.db')
